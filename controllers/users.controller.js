@@ -4,13 +4,13 @@ const dotenv = require('dotenv')
 
 // Models
 const { User } = require('../models/user.model')
+const { Room } = require('../models/room.model')
 const { Reservation } = require('../models/reservation.model')
+const { PaymentMethod } = require('../models/paymentMethod.model')
 
 // Utils
 const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
-const { Room } = require('../models/room.model')
-const { PaymentMethod } = require('../models/paymentMethod.model')
 
 dotenv.config()
 

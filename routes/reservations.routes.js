@@ -40,6 +40,7 @@ const reservationsRouter = express.Router()
 // Use middlewares to protect access
 reservationsRouter.use(protectSession)
 
+// Protected routes
 reservationsRouter.post(
     '/',
     createReservationValidators,
@@ -57,11 +58,12 @@ reservationsRouter.post(
     payReservation
 )
 
+// Protected admin routes
 reservationsRouter.use(protectAdmin)
 
-reservationsRouter.patch('/:id', reservationExists, finishedReservation)
-
 reservationsRouter.get('/', getReservations)
+
+reservationsRouter.patch('/:id', reservationExists, finishedReservation)
 
 reservationsRouter.delete('/:id', reservationExists, deleteReservationById)
 

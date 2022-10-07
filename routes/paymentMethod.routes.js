@@ -28,6 +28,7 @@ const paymentMethodsRouter = express.Router()
 paymentMethodsRouter.use(protectSession)
 paymentMethodsRouter.use(protectAdmin)
 
+// Protected admin routes
 paymentMethodsRouter.post('/', paymentMethodValidators, createPaymentMethod)
 
 paymentMethodsRouter.patch(

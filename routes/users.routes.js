@@ -27,15 +27,16 @@ const {
 
 const usersRouter = express.Router()
 
+// Unprotected routes
 usersRouter.post('/singup', createUserValidators, createUser)
 
 usersRouter.post('/login', loginValidators, login)
 
+// Use middlewares to protect access
 usersRouter.use(protectSession)
 
+// Protected routes
 usersRouter.get('/me', getUserSessionInfo)
-
-usersRouter.get('/', protectAdmin, getAllUsers)
 
 usersRouter.patch(
     '/:id',
@@ -46,5 +47,8 @@ usersRouter.patch(
 )
 
 usersRouter.delete('/:id', userExists, protectUsersAccount, deleteUser)
+
+// Protected admin routes
+usersRouter.get('/', protectAdmin, getAllUsers)
 
 module.exports = { usersRouter }

@@ -50,6 +50,7 @@ const protectUsersAccount = (req, res, next) => {
     next()
 }
 
+// To protect routes only access to admins
 const protectAdmin = (req, res, next) => {
     const { sessionUser } = req
 
