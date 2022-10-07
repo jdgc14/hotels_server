@@ -14,6 +14,7 @@ const Room = db.define('room', {
     roomNumber: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        unique: true,
     },
     pricePerDay: {
         type: DataTypes.FLOAT,

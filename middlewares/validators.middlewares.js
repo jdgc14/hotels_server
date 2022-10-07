@@ -54,4 +54,40 @@ const loginValidators = [
     checkValidations,
 ]
 
-module.exports = { createUserValidators, loginValidators }
+const hotelValidators = [
+    body('name')
+        .isString()
+        .withMessage('name must be a string')
+        .isLength({ min: 3 })
+        .withMessage('name must be at least 3 characters'),
+    body('address')
+        .isString()
+        .withMessage('address must be a string')
+        .isLength({ min: 10 })
+        .withMessage('address must be at least 3 characters'),
+    body('stars')
+        .isInt({ min: 1, max: 5 })
+        .withMessage('stars must be a integer from 1 to 5'),
+    checkValidations,
+]
+
+const roomValidators = [
+    body('roomNumber')
+        .isInt({ min: 1 })
+        .withMessage('roomNumber must be a integer'),
+    body('pricePerDay')
+        .isNumeric({ min: 0.1 })
+        .withMessage('pricePerDay must be a number'),
+    body('guests')
+        .isInt({ min: 1, max: 6 })
+        .withMessage('guests must be a integer from 1 to 6'),
+
+    checkValidations,
+]
+
+module.exports = {
+    createUserValidators,
+    loginValidators,
+    hotelValidators,
+    roomValidators,
+}
