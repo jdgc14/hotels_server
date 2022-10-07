@@ -4,6 +4,7 @@ const express = require('express')
 const {
     createReservation,
     payReservation,
+    finishedReservation,
     getReservations,
     deleteReservationById,
 } = require('../controllers/reservations.controller')
@@ -14,7 +15,10 @@ const {
     checkReservationIsPending,
 } = require('../middlewares/reservations.middlewares')
 
-const { roomExists } = require('../middlewares/rooms.middlewares')
+const {
+    roomExists,
+    roomIsAvailable,
+} = require('../middlewares/rooms.middlewares')
 
 const {
     paymentMethodExists,
@@ -28,6 +32,7 @@ const {
 // Validators
 const {
     createReservationValidators,
+    payReservationValidators,
 } = require('../middlewares/validators.middlewares')
 
 const reservationsRouter = express.Router()
@@ -39,16 +44,20 @@ reservationsRouter.post(
     '/',
     createReservationValidators,
     roomExists,
+    roomIsAvailable,
     createReservation
 )
 
-reservationsRouter.patch(
+reservationsRouter.post(
     '/:id',
     reservationExists,
     checkReservationIsPending,
+    payReservationValidators,
     paymentMethodExists,
     payReservation
 )
+
+reservationsRouter.patch('/:id', reservationExists, finishedReservation)
 
 reservationsRouter.use(protectAdmin)
 

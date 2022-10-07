@@ -33,7 +33,18 @@ const checkRoomNumberExist = catchAsync(async (req, res, next) => {
     return next(new AppError('roomNumber already exists', 400))
 })
 
+const roomIsAvailable = catchAsync(async (req, res, next) => {
+    const { room } = req
+
+    if (room.status === 'available') {
+        return next()
+    }
+
+    return next(new AppError('room not available', 400))
+})
+
 module.exports = {
     roomExists,
     checkRoomNumberExist,
+    roomIsAvailable,
 }

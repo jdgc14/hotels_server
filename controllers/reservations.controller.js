@@ -59,9 +59,24 @@ const deleteReservationById = catchAsync(async (req, res, next) => {
 
     const room = await Room.findOne({ where: { id: reservation.roomId } })
 
-    await room.update({ status: 'success' })
+    await room.update({ status: 'available' })
 
     res.status(204).json({
+        status: 'success',
+        data: { reservation },
+    })
+})
+
+const finishedReservation = catchAsync(async (req, res, next) => {
+    const { reservation } = req
+
+    await reservation.update({ status: 'finished' })
+
+    const room = await Room.findOne({ where: { id: reservation.roomId } })
+
+    await room.update({ status: 'available' })
+
+    res.status(200).json({
         status: 'success',
         data: { reservation },
     })
@@ -72,4 +87,5 @@ module.exports = {
     payReservation,
     getReservations,
     deleteReservationById,
+    finishedReservation,
 }

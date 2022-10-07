@@ -91,6 +91,13 @@ const createReservationValidators = [
     checkValidations,
 ]
 
+const payReservationValidators = [
+    body('paymentMethodId')
+        .isInt({ min: 1 })
+        .withMessage('paymentMethodId must be a integer'),
+    checkValidations,
+]
+
 const paymentMethodValidators = [
     body('name')
         .isString()
@@ -106,5 +113,6 @@ module.exports = {
     hotelValidators,
     roomValidators,
     createReservationValidators,
+    payReservationValidators,
     paymentMethodValidators,
 }
