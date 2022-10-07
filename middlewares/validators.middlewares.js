@@ -64,7 +64,7 @@ const hotelValidators = [
         .isString()
         .withMessage('address must be a string')
         .isLength({ min: 10 })
-        .withMessage('address must be at least 3 characters'),
+        .withMessage('address must be at least 10 characters'),
     body('stars')
         .isInt({ min: 1, max: 5 })
         .withMessage('stars must be a integer from 1 to 5'),
@@ -85,9 +85,26 @@ const roomValidators = [
     checkValidations,
 ]
 
+const createReservationValidators = [
+    body('roomId').isInt({ min: 1 }).withMessage('roomId must be a integer'),
+    body('days').isInt({ min: 1 }).withMessage('days must be a integer'),
+    checkValidations,
+]
+
+const paymentMethodValidators = [
+    body('name')
+        .isString()
+        .withMessage('name must be a string')
+        .isLength({ min: 3 })
+        .withMessage('name must be at least 3 characters'),
+    checkValidations,
+]
+
 module.exports = {
     createUserValidators,
     loginValidators,
     hotelValidators,
     roomValidators,
+    createReservationValidators,
+    paymentMethodValidators,
 }

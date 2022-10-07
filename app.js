@@ -3,6 +3,8 @@ const express = require('express')
 // Routers
 const { usersRouter } = require('./routes/users.routes')
 const { hotelsRouter } = require('./routes/hotels.routes')
+const { reservationsRouter } = require('./routes/reservations.routes')
+const { paymentMethodsRouter } = require('./routes/paymentMethod.routes')
 
 // Controllers
 const { globalErrorHandler } = require('./controllers/error.controller')
@@ -16,6 +18,8 @@ app.use(express.json())
 // Define endpoints
 app.use('/api/v1/users', usersRouter)
 app.use('/api/v1/hotels', hotelsRouter)
+app.use('/api/v1/reservations', reservationsRouter)
+app.use('/api/v1/paymentMethods', paymentMethodsRouter)
 
 // Global error handler
 app.use(globalErrorHandler)

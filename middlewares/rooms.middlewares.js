@@ -6,7 +6,7 @@ const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
 const roomExists = catchAsync(async (req, res, next) => {
-    const id = req.params.id
+    const id = req.params.id || req.body.roomId
 
     const room = await Room.findOne({
         where: { id },

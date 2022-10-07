@@ -27,8 +27,8 @@ const Reservation = db.define('reservation', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    paymentMethod: {
-        type: DataTypes.STRING,
+    paymentMethodId: {
+        type: DataTypes.INTEGER,
         allowNull: true,
     },
     status: {
