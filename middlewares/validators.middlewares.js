@@ -28,6 +28,13 @@ const createUserValidators = [
         .withMessage('lastName must be a string')
         .isLength({ min: 3 })
         .withMessage('lastName must be at least 3 characters'),
+    body('identificationDocument')
+        .isNumeric()
+        .withMessage('Must provide a identificationDocument')
+        .isLength({ min: 6, max: 12 })
+        .withMessage(
+            'identificationDocument must be at min 6 digits and max 12 digits'
+        ),
     body('email').isEmail().withMessage('Must provide a valid email'),
     body('password')
         .isString()
@@ -37,4 +44,14 @@ const createUserValidators = [
     checkValidations,
 ]
 
-module.exports = { createUserValidators }
+const loginValidators = [
+    body('email').isEmail().withMessage('Must provide a valid email'),
+    body('password')
+        .isString()
+        .withMessage('password must be a string')
+        .isLength({ min: 8 })
+        .withMessage('password must be at least 8 characters'),
+    checkValidations,
+]
+
+module.exports = { createUserValidators, loginValidators }
