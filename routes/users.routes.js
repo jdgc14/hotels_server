@@ -20,13 +20,14 @@ const {
 // Validators
 const {
     createUserValidators,
+    loginValidators,
 } = require('../middlewares/validators.middlewares')
 
 const usersRouter = express.Router()
 
-usersRouter.post('/', createUserValidators, createUser)
+usersRouter.post('/singup', createUserValidators, createUser)
 
-usersRouter.post('/login', login)
+usersRouter.post('/login', loginValidators, login)
 
 usersRouter.use(protectSession)
 
