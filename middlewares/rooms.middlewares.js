@@ -20,6 +20,7 @@ const roomExists = catchAsync(async (req, res, next) => {
     next()
 })
 
+// Check if the roomNumber is not being used
 const checkRoomNumberExist = catchAsync(async (req, res, next) => {
     const { roomNumber } = req.body
 
@@ -33,6 +34,7 @@ const checkRoomNumberExist = catchAsync(async (req, res, next) => {
     return next(new AppError('roomNumber already exists', 400))
 })
 
+// To validate if room is available to reserve
 const roomIsAvailable = catchAsync(async (req, res, next) => {
     const { room } = req
 

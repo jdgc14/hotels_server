@@ -21,6 +21,7 @@ const reservationExists = catchAsync(async (req, res, next) => {
     next()
 })
 
+// Check if reservation payment is pending
 const checkReservationIsPending = (req, res, next) => {
     const { reservation } = req
 

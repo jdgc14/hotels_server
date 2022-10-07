@@ -24,6 +24,7 @@ const { hotelValidators } = require('../middlewares/validators.middlewares')
 
 const hotelsRouter = express.Router()
 
+// Unprotected routes
 hotelsRouter.get('/', getActiveHotels)
 
 hotelsRouter.get('/:id', hotelExists, getHotelById)
@@ -32,6 +33,7 @@ hotelsRouter.get('/:id', hotelExists, getHotelById)
 hotelsRouter.use(protectSession)
 hotelsRouter.use(protectAdmin)
 
+// Protected admin routes
 hotelsRouter.post('/', hotelValidators, createHotel)
 
 hotelsRouter.patch('/:id', hotelExists, hotelValidators, updateHotelById)
