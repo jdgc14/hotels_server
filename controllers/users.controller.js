@@ -4,10 +4,13 @@ const dotenv = require('dotenv')
 
 // Models
 const { User } = require('../models/user.model')
+const { Reservation } = require('../models/reservation.model')
 
 // Utils
 const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
+const { Room } = require('../models/room.model')
+const { PaymentMethod } = require('../models/paymentMethod.model')
 
 dotenv.config()
 
@@ -59,10 +62,10 @@ const createUser = catchAsync(async (req, res, next) => {
 })
 
 const updateUser = catchAsync(async (req, res, next) => {
-    const { name } = req.body
+    const { firstName, lastName } = req.body
     const { user } = req
 
-    await user.update({ name })
+    await user.update({ firstName, lastName })
 
     res.status(200).json({
         status: 'success',
@@ -101,10 +104,45 @@ const login = catchAsync(async (req, res, next) => {
     })
 })
 
+const getUserSessionInfo = catchAsync(async (req, res, next) => {
+    const { id } = req.sessionUser
+
+    const user = await User.findOne({
+        where: { id },
+        attributes: {
+            exclude: ['password', 'status', 'createdAt', 'updatedAt'],
+        },
+        include: {
+            model: Reservation,
+            attributes: [
+                'id',
+                'days',
+                'totalPrice',
+                'paymentMethodId',
+                'status',
+                'createdAt',
+            ],
+            include: [
+                {
+                    model: Room,
+                    attributes: ['id', 'roomNumber', 'pricePerDay', 'guests'],
+                },
+                { model: PaymentMethod, attributes: ['id', 'name'] },
+            ],
+        },
+    })
+
+    res.status(200).json({
+        status: 'success',
+        data: { user },
+    })
+})
+
 module.exports = {
     getAllUsers,
     createUser,
     updateUser,
     deleteUser,
     login,
+    getUserSessionInfo,
 }

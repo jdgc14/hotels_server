@@ -6,10 +6,10 @@ const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
 const paymentMethodExists = catchAsync(async (req, res, next) => {
-    const id = req.body.paymentMethodId
+    const id = req.body.paymentMethodId || req.params.paymentMethodId
 
     const paymentMethod = await PaymentMethod.findOne({
-        where: { id },
+        where: { id, status: 'active' },
     })
 
     if (!paymentMethod) {

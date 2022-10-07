@@ -4,6 +4,7 @@ const express = require('express')
 const {
     createHotel,
     getActiveHotels,
+    getHotelById,
     updateHotelById,
     deleteHotelById,
 } = require('../controllers/hotels.controller')
@@ -24,6 +25,8 @@ const { hotelValidators } = require('../middlewares/validators.middlewares')
 const hotelsRouter = express.Router()
 
 hotelsRouter.get('/', getActiveHotels)
+
+hotelsRouter.get('/:id', hotelExists, getHotelById)
 
 // Use middlewares to protect access
 hotelsRouter.use(protectSession)

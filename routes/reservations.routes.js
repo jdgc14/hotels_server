@@ -57,9 +57,9 @@ reservationsRouter.post(
     payReservation
 )
 
-reservationsRouter.patch('/:id', reservationExists, finishedReservation)
-
 reservationsRouter.use(protectAdmin)
+
+reservationsRouter.patch('/:id', reservationExists, finishedReservation)
 
 reservationsRouter.get('/', getReservations)
 

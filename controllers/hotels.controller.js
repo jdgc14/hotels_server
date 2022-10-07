@@ -23,16 +23,36 @@ const createHotel = catchAsync(async (req, res, next) => {
 const getActiveHotels = catchAsync(async (req, res, next) => {
     const hotels = await Hotel.findAll({
         where: { status: 'active' },
+        attributes: { exclude: ['status', 'createdAt', 'updatedAt'] },
         include: {
             model: Room,
-            required: false,
-            where: { status: 'available' },
+            // required: false,
+            // where: { status: 'available' },
+            attributes: { exclude: ['hotelId', 'createdAt', 'updatedAt'] },
         },
     })
 
     res.status(200).json({
         status: 'success',
         data: { hotels },
+    })
+})
+
+const getHotelById = catchAsync(async (req, res, next) => {
+    const { id } = req.hotel
+
+    const hotel = await Hotel.findOne({
+        where: { id },
+        attributes: { exclude: ['status', 'createdAt', 'updatedAt'] },
+        include: {
+            model: Room,
+            attributes: { exclude: ['hotelId', 'createdAt', 'updatedAt'] },
+        },
+    })
+
+    res.status(200).json({
+        status: 'success',
+        data: { hotel },
     })
 })
 
@@ -67,6 +87,7 @@ const deleteHotelById = catchAsync(async (req, res, next) => {
 module.exports = {
     createHotel,
     getActiveHotels,
+    getHotelById,
     updateHotelById,
     deleteHotelById,
 }

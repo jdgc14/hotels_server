@@ -3,6 +3,8 @@ const express = require('express')
 // Controllers
 const {
     createPaymentMethod,
+    updatePaymentMethodById,
+    deletePaymentMethodById,
 } = require('../controllers/paymentMethods.controller')
 
 // Middlewares
@@ -27,5 +29,18 @@ paymentMethodsRouter.use(protectSession)
 paymentMethodsRouter.use(protectAdmin)
 
 paymentMethodsRouter.post('/', paymentMethodValidators, createPaymentMethod)
+
+paymentMethodsRouter.patch(
+    '/:paymentMethodId',
+    paymentMethodExists,
+    paymentMethodValidators,
+    updatePaymentMethodById
+)
+
+paymentMethodsRouter.delete(
+    '/:paymentMethodId',
+    paymentMethodExists,
+    deletePaymentMethodById
+)
 
 module.exports = { paymentMethodsRouter }

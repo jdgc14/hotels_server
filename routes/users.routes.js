@@ -7,6 +7,7 @@ const {
     updateUser,
     deleteUser,
     login,
+    getUserSessionInfo,
 } = require('../controllers/users.controller')
 
 // Middlewares
@@ -20,6 +21,7 @@ const {
 // Validators
 const {
     createUserValidators,
+    updateUserValidators,
     loginValidators,
 } = require('../middlewares/validators.middlewares')
 
@@ -31,9 +33,17 @@ usersRouter.post('/login', loginValidators, login)
 
 usersRouter.use(protectSession)
 
+usersRouter.get('/me', getUserSessionInfo)
+
 usersRouter.get('/', protectAdmin, getAllUsers)
 
-usersRouter.patch('/:id', userExists, protectUsersAccount, updateUser)
+usersRouter.patch(
+    '/:id',
+    userExists,
+    updateUserValidators,
+    protectUsersAccount,
+    updateUser
+)
 
 usersRouter.delete('/:id', userExists, protectUsersAccount, deleteUser)
 

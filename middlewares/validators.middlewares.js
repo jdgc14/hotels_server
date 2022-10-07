@@ -44,6 +44,20 @@ const createUserValidators = [
     checkValidations,
 ]
 
+const updateUserValidators = [
+    body('firstName')
+        .isString()
+        .withMessage('firstName must be a string')
+        .isLength({ min: 3 })
+        .withMessage('firstName must be at least 3 characters'),
+    body('lastName')
+        .isString()
+        .withMessage('lastName must be a string')
+        .isLength({ min: 3 })
+        .withMessage('lastName must be at least 3 characters'),
+    checkValidations,
+]
+
 const loginValidators = [
     body('email').isEmail().withMessage('Must provide a valid email'),
     body('password')
@@ -109,6 +123,7 @@ const paymentMethodValidators = [
 
 module.exports = {
     createUserValidators,
+    updateUserValidators,
     loginValidators,
     hotelValidators,
     roomValidators,
