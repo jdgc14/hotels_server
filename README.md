@@ -28,7 +28,7 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 > Inicio de sesión.
 
 - GET ('/')
-> Únicamente accesible por administradores, solicitamos la información de los usuarios registrados.
+> Únicamente accesible por administradores, solicitamos información de los usuarios registrados.
 
 - PATCH ('/:id')
 > Para modificar los datos de un usuario registrado a través del ID, solo el dueño de la cuenta tiene acceso.
@@ -37,4 +37,36 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 > Deshabilitar una cuenta de usuario a través del ID, solo el dueño de la cuenta tiene acceso.
 
 - GET ('/me')
-> Obtener la información del usuario en sesión.
+> Obtener información del usuario en sesión.
+
+#### Hotels
+
+('api/v1/hotels')
+
+- POST ('/')
+> Creación de hoteles, solo los administradores pueden crearlos.
+
+- GET ('/')
+- > Endpoint sin protección de usuario, obtener información de los hoteles registrados. Así como sus habitaciones.
+
+- GET ('/:id')
+- > Endpoint sin protección de usuario, obtener información de un hotel a través de su ID.
+
+- PATCH ('/:id')
+> Únicamente accesible por administradores, sirve para modificar los datos de un hotel registrado a través de su ID.
+
+- DELETE ('/:id')
+> Únicamente accesible por administradores, deshabilitar un hotel registrado.
+
+#### Rooms
+
+('api/v1/hotels/rooms')
+
+- POST ('/:hotelId')
+> Creación de habitación de hotel a través del hotelId enviado como parámetro, solo los administradores pueden crearlas.
+
+- PATCH ('/:id')
+> Únicamente accesible por administradores, sirve para modificar los datos de una habitación registrada a través de su ID.
+
+- DELETE ('/:id')
+> Únicamente accesible por administradores, sirve para deshabilitar una habitación registrada a través de su ID.
