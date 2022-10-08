@@ -1,7 +1,7 @@
 {
     "name": "node_template",
     "version": "1.0.0",
-    "description": "A simple Express server",
+    "description": "Server for Hotel Rooms Reservations",
     "main": "index.js",
     "scripts": {
         "start": "node server.js",
