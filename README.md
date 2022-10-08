@@ -17,9 +17,9 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 
 ## Endpoints
 
-#### Users
+## Users
 
-('api/v1/users')
+#### ('api/v1/users')
 
 - POST ('/singup')
 > Creación de usuarios.
@@ -40,9 +40,10 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 > Obtener información del usuario en sesión.
 
 ##
-#### Hotels
 
-('api/v1/hotels')
+## Hotels
+
+#### ('api/v1/hotels')
 
 - POST ('/')
 > Creación de hoteles, solo los administradores pueden crearlos.
@@ -60,9 +61,9 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 > Únicamente accesible por administradores, deshabilitar un hotel registrado.
 
 ##
-#### Rooms
+## Rooms
 
-('api/v1/hotels/rooms')
+#### ('api/v1/hotels/rooms')
 
 - POST ('/:hotelId')
 > Creación de habitación de hotel a través del hotelId enviado como parámetro, solo los administradores pueden crearlas.
@@ -74,9 +75,9 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 > Únicamente accesible por administradores, sirve para deshabilitar una habitación registrada a través de su ID.
 
 ##
-#### Reservations
+## Reservations
 
-('api/v1/hotels/reservations')
+#### ('api/v1/reservations')
 
 - POST ('/')
 > Creación de una reservación de habitación, enviamos los días (days) de reserva y el roomId a través del body. Se verifica que la habitación esté disponible, antes de crear la reservación.
@@ -94,9 +95,9 @@ PATCH ('/:reservationId')
 > Únicamente accesible por administradores, su función es dar por concluida la reserva cuando se cumplan los días de la misma. También se marca la habitación que estaba ocupada como disponible.
 
 ##
-#### Payment Methods
+## Payment Methods
 
-('api/v1/hotels/paymentMethods')
+#### ('api/v1/paymentMethods')
 
 - POST ('/')
 > Creación de un método de pago, solo los administradores pueden crearlos. Enviamos el nombre (name) del método de pago a través del body.
