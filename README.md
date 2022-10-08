@@ -39,6 +39,7 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 - GET ('/me')
 > Obtener información del usuario en sesión.
 
+##
 #### Hotels
 
 ('api/v1/hotels')
@@ -47,10 +48,10 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 > Creación de hoteles, solo los administradores pueden crearlos.
 
 - GET ('/')
-- > Endpoint sin protección de usuario, obtener información de los hoteles registrados. Así como sus habitaciones.
+> Endpoint sin protección de usuario, obtener información de los hoteles registrados. Así como sus habitaciones.
 
 - GET ('/:id')
-- > Endpoint sin protección de usuario, obtener información de un hotel a través de su ID.
+> Endpoint sin protección de usuario, obtener información de un hotel a través de su ID.
 
 - PATCH ('/:id')
 > Únicamente accesible por administradores, sirve para modificar los datos de un hotel registrado a través de su ID.
@@ -58,6 +59,7 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 - DELETE ('/:id')
 > Únicamente accesible por administradores, deshabilitar un hotel registrado.
 
+##
 #### Rooms
 
 ('api/v1/hotels/rooms')
@@ -70,3 +72,37 @@ https://www.postman.com/joint-operations-technologist-37890296/workspace/hotel-a
 
 - DELETE ('/:id')
 > Únicamente accesible por administradores, sirve para deshabilitar una habitación registrada a través de su ID.
+
+##
+#### Reservations
+
+('api/v1/hotels/reservations')
+
+- POST ('/')
+> Creación de una reservación de habitación, enviamos los días (days) de reserva y el roomId a través del body. Se verifica que la habitación esté disponible, antes de crear la reservación.
+
+- GET ('/')
+> Obtener las reservaciones realizadas por el usuario en sesión.
+
+POST ('/:reservationId')
+> Para marcar la reservación (encontrada a través del parámetro reservationId) como pagada, enviamos el método de pago (paymentMethodId) a través del body.
+
+DELETE ('/:reservationId')
+> Únicamente accesible por administradores, sirve para deshabilitar una reservación registrada a través de su ID.
+
+PATCH ('/:reservationId')
+> Únicamente accesible por administradores, su función es dar por concluida la reserva cuando se cumplan los días de la misma. También se marca la habitación que estaba ocupada como disponible.
+
+##
+#### Payment Methods
+
+('api/v1/hotels/paymentMethods')
+
+- POST ('/')
+> Creación de un método de pago, solo los administradores pueden crearlos. Enviamos el nombre (name) del método de pago a través del body.
+
+PATCH ('/:paymentMethodId')
+> Únicamente accesible por administradores, para actualizar el nombre (name) de un método de pago registrado a través de su ID.
+
+DELETE ('/:paymentMethodId')
+> Únicamente accesible por administradores, para deshabilitar un método de pago registrado a través de su ID.
