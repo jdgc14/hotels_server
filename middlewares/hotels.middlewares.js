@@ -20,6 +20,15 @@ const hotelExists = catchAsync(async (req, res, next) => {
     next()
 })
 
+const disableAllRooms = catchAsync(async (rooms) => {
+    const roomsPromises = rooms.map(async (room) => {
+        await room.update({ status: 'deleted' })
+    })
+
+    Promise.all(roomsPromises)
+})
+
 module.exports = {
     hotelExists,
+    disableAllRooms,
 }

@@ -5,6 +5,9 @@ const { Room } = require('../models/room.model')
 // Utils
 const { catchAsync } = require('../utils/catchAsync.util')
 
+// Middlewares
+const { disableAllRooms } = require('../middlewares/hotels.middlewares')
+
 const createHotel = catchAsync(async (req, res, next) => {
     const { name, address, stars } = req.body
 
@@ -73,16 +76,20 @@ const updateHotelById = catchAsync(async (req, res, next) => {
     })
 })
 
-const deleteHotelById = catchAsync(async (req, res, next) => {
+const deleteHotelById = async (req, res, next) => {
     const { hotel } = req
 
     await hotel.update({ status: 'deleted' })
+
+    const rooms = await Room.findAll({ where: { hotelId: hotel.id } })
+
+    await disableAllRooms(rooms)
 
     res.status(204).json({
         status: 'success',
         data: { hotel },
     })
-})
+}
 
 module.exports = {
     createHotel,
